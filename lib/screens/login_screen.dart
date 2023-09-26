@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text("Hoşgeldin, lütfen giriş yap.",style: GoogleFonts.aBeeZee(fontSize: 20)),
-                SizedBox(height: 22,),
+                const SizedBox(height: 22,),
                 Padding(
                     padding: const EdgeInsets.all(8),
                     child: MyTextField(emailController, "Mail Adres", false,TextInputType.emailAddress,null)),
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           obsecure=!obsecure;
                           setState(() {});
                         },
-                        icon: obsecure ? Icon(Icons.visibility,color: Colors.black,):Icon(Icons.visibility_off,color: Colors.black),
+                        icon: obsecure ? const Icon(Icons.visibility,color: Colors.black,):const Icon(Icons.visibility_off,color: Colors.black),
                       ),
                     )
                 ),
@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   },
                   text: "Giriş Yap",
-                  color: Color.fromARGB(100, 100, 100, 100),
+                  color: const Color.fromARGB(100, 100, 100, 100),
                   height: 80,
                   fontsize: 25,
                   padding: 25,
@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               'name':'   ',
                               'following':[]
                             });
-                        Get.to(()=>const HobiesScreen());
+                        Get.to(()=>const HobiesScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                       }else{
                         Get.back();
                       }
@@ -106,11 +106,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Hesabın yok mu ? "),
+                    const Text("Hesabın yok mu ? "),
                     MyTextButton(
                       text: "Hemen üye ol",
                       onTap: () {
-                        Get.to(()=>RegisterScreen(),transition: Transition.rightToLeft,duration: Duration(milliseconds: 1000));
+                        Get.to(()=>const RegisterScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                       },
                     ),
                   ],

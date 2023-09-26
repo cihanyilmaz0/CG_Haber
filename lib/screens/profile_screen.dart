@@ -101,14 +101,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               dataS.length.toString(),
                               "Takipçi",
                                   () {
-                                      Get.to(()=>FollowersDetailScreen(dataS,"Takipçi"),transition: Transition.size,duration: const Duration(milliseconds: 1000));
+                                      Get.to(()=>FollowersDetailScreen(dataS,"Takipçi"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                                     },
                             ),
                             FollowersModel(
                               data.get('following').length.toString(),
                               "Takip",
                                   () {
-                                Get.to(()=>FollowersDetailScreen(data.get('following'),"Takip"),transition: Transition.size,duration: const Duration(milliseconds: 1000));
+                                Get.to(()=>FollowersDetailScreen(data.get('following'),"Takip"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                                   },
                             ),
                           ],
@@ -124,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                               ListTile(
                                 onTap: () {
-                                  Get.to(()=>const EditProfileScreen(),transition: Transition.downToUp,duration: const Duration(milliseconds: 1000));
+                                  Get.to(()=>const EditProfileScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                                 },
                                 title: Text("Profili Düzenle",style: GoogleFonts.oswald(),),
                                 leading: const Icon(Icons.edit),
@@ -141,9 +141,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     textConfirm: "Evet",
                                     title: "Uyarı !",
                                     onConfirm: () async{
-                                      QuerySnapshot snapuser = await FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: AuthService().firebaseAuth.currentUser!.uid).get();
-                                      QuerySnapshot snappost = await FirebaseFirestore.instance.collection('News').doc(AuthService().firebaseAuth.currentUser!.uid).collection('Bookmark').get();
-                                      QuerySnapshot snapmessage = await FirebaseFirestore.instance.collection('Messages').where('users',arrayContains: AuthService().firebaseAuth.currentUser!.uid).get();
+                                      final ids = AuthService().firebaseAuth.currentUser!.uid;
+                                      Get.to(()=>const WelcomeScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                                      FirebaseAuth.instance.currentUser!.delete();
+                                      QuerySnapshot snapuser = await FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: ids).get();
+                                      QuerySnapshot snappost = await FirebaseFirestore.instance.collection('News').doc(ids).collection('Bookmark').get();
+                                      QuerySnapshot snapmessage = await FirebaseFirestore.instance.collection('Messages').where('users',arrayContains: ids).get();
                                       snapmessage.docs.forEach((element) async{
                                         String id = element.get('docID');
                                         final a = await FirebaseFirestore.instance.collection('Messages').doc(id).collection('message').get();
@@ -158,9 +161,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       }for (DocumentSnapshot document in snapuser.docs) {
                                         await document.reference.delete();
                                       }
-                                      FirebaseAuth.instance.currentUser!.delete();
-                                      AuthService().firebaseAuth.signOut();
-                                      Get.to(()=>WelcomeScreen());
                                     },
                                   );
                                 },

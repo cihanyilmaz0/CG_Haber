@@ -40,7 +40,7 @@ class RecomPerson extends StatelessWidget {
               final userData = notFollowing[index].data();
               return GestureDetector(
                 onTap: () {
-                  Get.to(()=>UserDetailScreen(userData['uid']),transition: Transition.upToDown,duration: const Duration(milliseconds: 1000));
+                  Get.to(()=>UserDetailScreen(userData['uid']),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                 },
                 child: Container(
                   margin: const EdgeInsets.only(left: 15),

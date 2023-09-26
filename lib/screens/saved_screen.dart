@@ -112,7 +112,7 @@ class _SavedScreenState extends State<SavedScreen> {
                 isSaved(index, snapshot.data!.docs[index].get('name'));
                 return InkWell(
                   onTap: () {
-                    Get.to(()=>DetailScreen(snapshot.data!.docs[index].get('url')),transition: Transition.downToUp,duration: const Duration(milliseconds: 1000));
+                    Get.to(()=>DetailScreen(snapshot.data!.docs[index].get('url')),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                   },
                   child: Card(
                     color: Colors.white10,

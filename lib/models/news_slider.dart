@@ -19,19 +19,19 @@ class SliderNews extends StatelessWidget {
           aspectRatio: 16 / 9,
           autoPlayCurve: Curves.fastOutSlowIn,
           enableInfiniteScroll: true,
-          autoPlayAnimationDuration: Duration(milliseconds: 800),
+          autoPlayAnimationDuration: const Duration(milliseconds: 800),
           viewportFraction: 0.8,
         ),
         itemCount: controller.sliderHaberResult.length,
         itemBuilder: (context, index, realIndex) {
           if(controller.sliderHaberResult.isEmpty){
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
           return InkWell(
             onTap: () {
-              Get.to(()=>DetailScreen(controller.sliderHaberResult[index].url),transition: Transition.downToUp,duration: Duration(milliseconds: 1000));
+              Get.to(()=>DetailScreen(controller.sliderHaberResult[index].url),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
             },
             child: Stack(
               children: [

@@ -102,7 +102,7 @@ class _RecommandationState extends State<Recommandation> {
             isSaved(index);
             return InkWell(
               onTap: () {
-                Get.to(()=>DetailScreen(widget.list[index].url),transition: Transition.downToUp,duration: const Duration(milliseconds: 1000));
+                Get.to(()=>DetailScreen(widget.list[index].url),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
               },
               child: Card(
                 color: Colors.white10,

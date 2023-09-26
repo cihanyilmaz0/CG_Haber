@@ -46,7 +46,7 @@ class _FollowersDetailScreenState extends State<FollowersDetailScreen> {
                     final snap = snapshot.data!.docs;
                     return GestureDetector(
                       onTap: () {
-                        Get.to(()=>UserDetailScreen(snap.first.get('uid')),transition: Transition.upToDown,duration: const Duration(milliseconds: 1000));
+                        Get.to(()=>UserDetailScreen(snap.first.get('uid')),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                       },
                       child: Card(
                         margin: const EdgeInsets.all(10),

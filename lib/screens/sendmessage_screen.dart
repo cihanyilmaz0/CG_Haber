@@ -45,9 +45,9 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                 GestureDetector(
                     onTap: () {
                       if(widget.yollayan != AuthService().firebaseAuth.currentUser!.uid){
-                        Get.to(()=>UserDetailScreen(widget.yollayan),transition: Transition.upToDown,duration: const Duration(milliseconds: 1000));
+                        Get.to(()=>UserDetailScreen(widget.yollayan),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                       }else{
-                        Get.to(()=>UserDetailScreen(widget.alan),transition: Transition.upToDown,duration: const Duration(milliseconds: 1000));
+                        Get.to(()=>UserDetailScreen(widget.alan),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                       }
                     },
                     child: Text(widget.kadi, style: GoogleFonts.oswald(fontSize: 18),)
@@ -56,9 +56,9 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                 GestureDetector(
                   onTap: () {
                     if(widget.yollayan != AuthService().firebaseAuth.currentUser!.uid){
-                      Get.to(()=>UserDetailScreen(widget.yollayan),transition: Transition.upToDown,duration: const Duration(milliseconds: 1000));
+                      Get.to(()=>UserDetailScreen(widget.yollayan),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                     }else{
-                      Get.to(()=>UserDetailScreen(widget.alan),transition: Transition.upToDown,duration: const Duration(milliseconds: 1000));
+                      Get.to(()=>UserDetailScreen(widget.alan),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                     }
                     },
                   child: CircleAvatar(

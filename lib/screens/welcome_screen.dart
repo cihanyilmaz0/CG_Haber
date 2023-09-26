@@ -43,7 +43,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     MyButton(
                       text: "Başlayın",
                       onTap: () {
-                        Get.to(()=>const LoginScreen(),transition: Transition.rightToLeft,duration: const Duration(seconds: 1));
+                        Get.to(()=>const LoginScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                       },
                       color: Color.fromARGB(100, 100, 100, 100),
                       height: 80,
