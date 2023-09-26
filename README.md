@@ -1,16 +1,36 @@
-# haber
+# Flutter News App
 
-A new Flutter project.
+The Flutter News App is a versatile mobile application that empowers users to stay informed about the latest news. Users can register, customize their interests, and interact with a dynamic news feed. Additionally, the app facilitates social interaction by allowing users to follow each other, send news updates, and manage their profiles.
 
-## Getting Started
+## Key Features
 
-This project is a starting point for a Flutter application.
+### Registration and Authentication
 
-A few resources to get you started if this is your first Flutter project:
+- Users can create accounts and log in securely.
+- Password reset and account recovery options are available.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Personalization
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Customize your news feed based on selected interests.
+- Tailor your profile with personal information, including profile picture and bio.
+
+### News Feed
+
+- Access a curated feed of news articles.
+- Filter news by category, source, or keyword for a personalized experience.
+- Stay up-to-date with breaking news notifications.
+
+### Social Interaction
+
+- Follow other users to see their activity in your feed.
+- Manage your followers and the users you follow.
+
+### Messaging
+
+- Send news articles to friends and engage in discussions.
+- Receive news updates and messages from other users.
+
+### User Search
+
+- Easily find other users on a dedicated search page.
+- Connect with like-minded individuals and expand your network.
