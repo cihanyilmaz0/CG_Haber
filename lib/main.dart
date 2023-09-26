@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeController = Get.put(HomeController());
+    final controller = Get.put<HomeController>(HomeController());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
@@ -30,8 +30,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.active) {
             final user = snapshot.data;
             if (user == null) {
-              homeController.listHaberResult.clear();
-              homeController.sliderHaberResult.clear();
+              controller.sliderHaberResult.clear();
               return WelcomeScreen();
             } else {
               FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: AuthService().firebaseAuth.currentUser!.uid).snapshots()

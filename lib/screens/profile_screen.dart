@@ -1,11 +1,13 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:haber/compenents/my_info.dart';
 import 'package:haber/models/followers_following_model.dart';
 import 'package:haber/screens/editprofile_screen.dart';
 import 'package:haber/screens/followersdetail_screen.dart';
+import 'package:haber/screens/welcome_screen.dart';
 import 'package:haber/services/auth_service.dart';
 import 'package:get/get.dart';
 
@@ -129,14 +131,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               ListTile(
                                 onTap: () {
-                                  print("Ayarlar");
+                                  Get.defaultDialog(
+                                    content: const Text("Hesabınıza ait tüm içerikler kalıcı olarak silinecek onaylıyor musunuz ?"),
+                                    contentPadding: EdgeInsets.all(10),
+                                    buttonColor: Colors.red,
+                                    cancelTextColor: Colors.white,
+                                    confirmTextColor: Colors.white,
+                                    textCancel: "Hayır",
+                                    textConfirm: "Evet",
+                                    title: "Uyarı !",
+                                    onConfirm: () async{
+                                      QuerySnapshot snapuser = await FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: AuthService().firebaseAuth.currentUser!.uid).get();
+                                      QuerySnapshot snappost = await FirebaseFirestore.instance.collection('News').doc(AuthService().firebaseAuth.currentUser!.uid).collection('Bookmark').get();
+                                      QuerySnapshot snapmessage = await FirebaseFirestore.instance.collection('Messages').where('users',arrayContains: AuthService().firebaseAuth.currentUser!.uid).get();
+                                      snapmessage.docs.forEach((element) async{
+                                        String id = element.get('docID');
+                                        final a = await FirebaseFirestore.instance.collection('Messages').doc(id).collection('message').get();
+                                        for (DocumentSnapshot document in a.docs) {
+                                          await document.reference.delete();
+                                        }
+                                      });
+                                      for (DocumentSnapshot document in snappost.docs) {
+                                        await document.reference.delete();
+                                      }for (DocumentSnapshot document in snapmessage.docs) {
+                                        await document.reference.delete();
+                                      }for (DocumentSnapshot document in snapuser.docs) {
+                                        await document.reference.delete();
+                                      }
+                                      FirebaseAuth.instance.currentUser!.delete();
+                                      AuthService().firebaseAuth.signOut();
+                                      Get.to(()=>WelcomeScreen());
+                                    },
+                                  );
                                 },
-                                title: const Text("Ayarlar"),
-                                leading: const Icon(Icons.settings),
+                                title: const Text("Hesabı Sil"),
+                                leading: const Icon(Icons.delete),
                               ),
                               ListTile(
                                 onTap: () {
-                                  AuthService().signOut();
+                                  Get.defaultDialog(
+                                    content: const Text("Çıkış yapmak istiyor musunuz ?"),
+                                    contentPadding: EdgeInsets.all(10),
+                                    buttonColor: Colors.red,
+                                    cancelTextColor: Colors.white,
+                                    confirmTextColor: Colors.white,
+                                    textCancel: "Hayır",
+                                    textConfirm: "Evet",
+                                    title: "Dikkat",
+                                    onConfirm: () {
+                                      AuthService().signOut();
+                                      Get.back();
+                                    },
+                                  );
                                 },
                                 title: Text("Çıkış Yap",style: GoogleFonts.oswald(color: Colors.red),),
                                 leading: const Icon(Icons.logout,color: Colors.red,),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:haber/compenents/my_button.dart';
@@ -7,6 +8,7 @@ import 'package:haber/models/recom_person.dart';
 import 'package:haber/models/recommandation_model.dart';
 import 'package:haber/screens/personalnews_screen.dart';
 import 'package:haber/screens/search_screen.dart';
+import 'package:haber/services/auth_service.dart';
 import 'package:haber/services/home_controller.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -38,7 +40,6 @@ class _NewsScreenState extends State<NewsScreen> {
       body: RefreshIndicator(
         onRefresh: () async{
           homeController.loadData("general", homeController.sliderHaberResult);
-          homeController.loadHobies();
         },
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
@@ -71,14 +72,17 @@ class _NewsScreenState extends State<NewsScreen> {
                     TextButton(
                       child: Text("Tümünü gör",style: GoogleFonts.aBeeZee(color: Colors.blue)),
                       onPressed: () {
-                        Get.to(()=>PersonalNewsScreen(homeController.hobiesList),transition: Transition.leftToRightWithFade,duration: const Duration(milliseconds: 1000));
+                        final a = FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: AuthService().firebaseAuth.currentUser!.uid).snapshots();
+                        a.forEach((element) {
+                          Get.to(()=>PersonalNewsScreen(element.docs.first.get('hobies').cast<String>()),transition: Transition.leftToRightWithFade,duration: const Duration(milliseconds: 1000));
+                        });
                       },
                     ),
                   ],
                 ),
                 Obx(
-                    () => homeController.isDataLoading.value && homeController.listHaberResult.isNotEmpty ?
-                    Recommandation(list: homeController.listHaberResult,count: 2,physics: const NeverScrollableScrollPhysics()) :
+                    () => homeController.isDataLoading.value && homeController.economyHaberResult.isNotEmpty ?
+                    Recommandation(list: homeController.economyHaberResult,count: 2,physics: const NeverScrollableScrollPhysics()) :
                   const Center(child: CircularProgressIndicator(),),
                 ),
               ],

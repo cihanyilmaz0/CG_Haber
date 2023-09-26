@@ -17,7 +17,6 @@ class _PersonalNewsScreenState extends State<PersonalNewsScreen> {
   String hobiesString = "";
   int selectedIndex = -1;
   final controller = Get.put<HomeController>(HomeController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +67,7 @@ class _PersonalNewsScreenState extends State<PersonalNewsScreen> {
               Expanded(child: Recommandation(list: controller.economyHaberResult,count: controller.economyHaberResult.length, physics: const BouncingScrollPhysics()))
                   : hobiesString == "Teknoloji" ?
               Expanded(child: Recommandation(list: controller.technologyHaberResult,count: controller.technologyHaberResult.length, physics: const BouncingScrollPhysics()))
-                  : hobiesString == "Sport" ?
+                  : hobiesString == "Spor" ?
               Expanded(child: Recommandation(list: controller.sportHaberResult,count: controller.sportHaberResult.length, physics: const BouncingScrollPhysics()))
                   : Container(),
             ],
