@@ -1,15 +1,15 @@
-# Flutter Haber Uygulaması
+# Flutter News App
 
-Bu Flutter haber uygulaması, kullanıcıların kayıt olabileceği, ilgi alanlarını seçebileceği, haberleri filtreleyebileceği, son dakika haberlerini takip edebileceği, diğer kullanıcıları takip edebileceği, haberleri arkadaşlarına gönderebileceği ve mesajlaşabileceği, kişisel profillerini özelleştirebileceği bir platform sunar.
+This Flutter news app provides users with the ability to register, select their interests, filter news, follow breaking news, follow other users, send and receive news to friends, and customize their personal profiles.
 
-## Kullanım
+## Usage
 
-Uygulamayı çalıştırdıktan sonra, aşağıdaki özellikleri kullanabilirsiniz:
+After running the application, you can utilize the following features:
 
-Kayıt olun ve giriş yapın.
-İlgilendiğiniz haber tarzlarını seçin ve filtreleyin.
-Son dakika haberlerini görüntüleyin.
-Diğer kullanıcıları takip edin ve takipçilerinizi yönetin.
-Haberleri arkadaşlarınıza gönderin ve mesajlaşın.
-Profilinizi özelleştirin ve kişisel bilgilerinizi güncelleyin.
-Kullanıcıları özel bir sayfada arayın ve bulun.
+1-Register and log in.
+2-Select and filter news based on your interests.
+3-View breaking news.
+4-Follow other users and manage your followers.
+5-Send and receive news messages to and from friends.
+6-Customize your profile and update personal information.
+7-Search and find users on a dedicated page.
