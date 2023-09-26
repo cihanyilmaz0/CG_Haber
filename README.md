@@ -34,22 +34,6 @@ The Flutter News App is a versatile mobile application that empowers users to st
 
 - Easily find other users on a dedicated search page.
 - Connect with like-minded individuals and expand your network.
-
-## Getting Started
-
-Follow these steps to set up and run the Flutter News App on your local environment:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/flutter-news-app.git
-Navigate to the project directory:
-
-2. cd flutter-news-app
-Install dependencies:
-
-3. flutter pub get
-Create a config.dart file in the lib directory and add your NewsAPI key:
-
 4. const String apiKey = 'YOUR_API_KEY_HERE';
 Run the application:
 
