@@ -34,9 +34,3 @@ The Flutter News App is a versatile mobile application that empowers users to st
 
 - Easily find other users on a dedicated search page.
 - Connect with like-minded individuals and expand your network.
-4. const String apiKey = 'YOUR_API_KEY_HERE';
-Run the application:
-
-5. flutter run
-Contributing
-We welcome contributions! Please check out the Contributing Guidelines for more details.
