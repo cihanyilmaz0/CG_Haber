@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "981978953436",
+    "project_id": "haber-5f367",
+    "storage_bucket": "haber-5f367.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981978953436:android:467e41b68ab75ca02b2619",
+        "android_client_info": {
+          "package_name": "com.cihanyilmaz.haber.habers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981978953436-pln2uldb5i6d301eb0rjpq47k5b2hl5i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cihanyilmaz.haber.habers",
+            "certificate_hash": "6710f787f504adfe5f7fb155287fd1a746200ef7"
+          }
+        },
+        {
+          "client_id": "981978953436-faqmmrv5q2dhirs2gp0o9j551l3ieq8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3VO5SAc30XfL3VzDHydQ5rqCKlmi1x3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981978953436-faqmmrv5q2dhirs2gp0o9j551l3ieq8l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
