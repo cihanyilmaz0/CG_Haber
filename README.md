@@ -1,16 +1,2 @@
-# haber
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Flutter Haber Uygulaması
+Bu Flutter haber uygulaması, kullanıcıların kayıt olabileceği, ilgi alanlarını seçebileceği, haberleri filtreleyebileceği, son dakika haberlerini takip edebileceği, diğer kullanıcıları takip edebileceği, haberleri arkadaşlarına gönderebileceği ve kişisel profillerini özelleştirebileceği bir platform sunar.
