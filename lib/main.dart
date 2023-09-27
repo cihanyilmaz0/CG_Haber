@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haber/models/home_page.dart';
 import 'package:haber/screens/loading_screen.dart';
-import 'package:haber/screens/welcome_screen.dart';
+import 'package:haber/screens/login_screen.dart';
 import 'package:haber/services/auth_service.dart';
 import 'package:haber/services/home_controller.dart';
 
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             final user = snapshot.data;
             if (user == null) {
               controller.sliderHaberResult.clear();
-              return WelcomeScreen();
+              return const LoginScreen();
             } else {
               FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: AuthService().firebaseAuth.currentUser!.uid).snapshots()
               .forEach((element) async{

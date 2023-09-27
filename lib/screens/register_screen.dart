@@ -39,9 +39,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 22,),
+                const SizedBox(height: 22,),
                 Text("Kayıt Ol",style: GoogleFonts.aBeeZee(fontSize: 20)),
-                SizedBox(height: 22,),
+                const SizedBox(height: 22,),
                 Padding(
                     padding: const EdgeInsets.all(8),
                     child: MyTextField(emailController, "Mail Adres", false,TextInputType.emailAddress,null)),
@@ -53,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           obsecure=!obsecure;
                           setState(() {});
                         },
-                        icon: obsecure ? Icon(Icons.visibility,color: Colors.black,):Icon(Icons.visibility_off,color: Colors.black),
+                        icon: obsecure ? const Icon(Icons.visibility,color: Colors.black,):const Icon(Icons.visibility_off,color: Colors.black),
                       ),
                     )
                 ),
@@ -65,7 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           obsecure=!obsecure;
                           setState(() {});
                         },
-                        icon: obsecure ? Icon(Icons.visibility,color: Colors.black):Icon(Icons.visibility_off,color: Colors.black),
+                        icon: obsecure ? const Icon(Icons.visibility,color: Colors.black):const Icon(Icons.visibility_off,color: Colors.black),
                       ),
                     )
                 ),
@@ -125,18 +125,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           sifreController.text = "";
                           sifreonayController.text = "";
                         }
-                        Get.to(()=>HobiesScreen(),transition: Transition.native);
+                        Get.to(()=>const HobiesScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
                       }
                     };
                   },
                   text: "Onayla ve Kayıt Ol",
-                  color: Color.fromARGB(100, 100, 100, 100),
+                  color: const Color.fromARGB(100, 100, 100, 100),
                   height: 80,
                   fontsize: 25,
                   padding: 25,
                   width: MediaQuery.of(context).size.width,
                 ),
-                Divider(color: Colors.white,),
+                const Divider(color: Colors.white,),
                 MyTextButton(
                   text: "Hemen giriş yap",
                   onTap: () {

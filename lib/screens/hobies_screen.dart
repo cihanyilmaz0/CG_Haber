@@ -43,10 +43,6 @@ class _HobiesScreenState extends State<HobiesScreen> {
     });
   }
 
-  Future<bool> geridonme (BuildContext context) async{
-    return false;
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

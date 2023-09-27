@@ -86,80 +86,85 @@ class _SavedScreenState extends State<SavedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Text("Kaydedilenler",style: GoogleFonts.oswald()),
-          centerTitle: true,
-          toolbarHeight: 65,
-          leading: widget.isBack ? MyIconButton(
-            icon: Icon(Icons.arrow_back_ios_sharp),
-            onTap: () {
-              Get.back();
-            },
-          ): Container()
-      ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('News').doc(widget.uid).collection('Bookmark').snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(child: Text('Hata: ${snapshot.error}'));
-          }else{
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: snapshot.data?.docs.length ?? 0,
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                isSaved(index, snapshot.data!.docs[index].get('name'));
-                return InkWell(
-                  onTap: () {
-                    Get.to(()=>DetailScreen(snapshot.data!.docs[index].get('url')),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
-                  },
-                  child: Card(
-                    color: Colors.white10,
-                    margin: const EdgeInsets.only(left: 8,right: 8,bottom: 6,top: 8),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          margin: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(Radius.circular(30)),
-                            image: DecorationImage(image: NetworkImage(snapshot.data!.docs[index].get('image')),fit: BoxFit.cover),
+    return WillPopScope(
+      onWillPop: () async{
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+            title: Text("Kaydedilenler",style: GoogleFonts.oswald()),
+            centerTitle: true,
+            toolbarHeight: 65,
+            leading: widget.isBack ? MyIconButton(
+              icon: Icon(Icons.arrow_back_ios_sharp),
+              onTap: () {
+                Get.back();
+              },
+            ): Container()
+        ),
+        body: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection('News').doc(widget.uid).collection('Bookmark').snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(child: Text('Hata: ${snapshot.error}'));
+            }else{
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: snapshot.data?.docs.length ?? 0,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  isSaved(index, snapshot.data!.docs[index].get('name'));
+                  return InkWell(
+                    onTap: () {
+                      Get.to(()=>DetailScreen(snapshot.data!.docs[index].get('url')),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                    },
+                    child: Card(
+                      color: Colors.white10,
+                      margin: const EdgeInsets.only(left: 8,right: 8,bottom: 6,top: 8),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 100,
+                            height: 100,
+                            margin: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(Radius.circular(30)),
+                              image: DecorationImage(image: NetworkImage(snapshot.data!.docs[index].get('image')),fit: BoxFit.cover),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width*0.55,
-                          child: Column(
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width*0.55,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(snapshot.data!.docs[index].get('name')),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(snapshot.data!.docs[index].get('name')),
+                              IconButton(
+                                icon: const Icon(Icons.bookmark,),
+                                onPressed: () {
+                                  toggleBookmark(index, snapshot.data!.docs[index].get('name'));
+                                },
                               ),
                             ],
                           ),
-                        ),
-                        Column(
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.bookmark,),
-                              onPressed: () {
-                                toggleBookmark(index, snapshot.data!.docs[index].get('name'));
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            );
-          }
-        },
+                  );
+                },
+              );
+            }
+          },
+        ),
       ),
     );
   }
