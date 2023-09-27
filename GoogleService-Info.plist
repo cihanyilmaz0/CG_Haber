@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>981978953436-dmbslrlh647s2csfd2ka36tq9ecfstv1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.981978953436-dmbslrlh647s2csfd2ka36tq9ecfstv1</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>981978953436-pln2uldb5i6d301eb0rjpq47k5b2hl5i.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDrN5RvMfM_ukXswSXNdtc5CduhSfK82BM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>981978953436</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.cihanyilmaz.haber.haber</string>
+	<key>PROJECT_ID</key>
+	<string>haber-5f367</string>
+	<key>STORAGE_BUCKET</key>
+	<string>haber-5f367.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:981978953436:ios:0de220518ea937542b2619</string>
+	<key>DATABASE_URL</key>
+	<string>https://haber-5f367-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>
