@@ -14,9 +14,14 @@ class PersonalNewsScreen extends StatefulWidget {
 }
 
 class _PersonalNewsScreenState extends State<PersonalNewsScreen> {
-  String hobiesString = "";
-  int selectedIndex = -1;
+  int selectedIndex = 0;
+  String hobiesString ="";
   final controller = Get.put<HomeController>(HomeController());
+  @override
+  void initState() {
+    hobiesString = widget.list[selectedIndex];
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +54,7 @@ class _PersonalNewsScreenState extends State<PersonalNewsScreen> {
                             selected: isSelected,
                             onSelected: (bool selected) {
                               setState(() {
-                                selectedIndex = selected ? index : -1;
+                                selectedIndex = index;
                                 hobiesString = item;
                               });
                             },

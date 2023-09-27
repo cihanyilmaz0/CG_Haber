@@ -105,14 +105,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 dataS.length.toString(),
                                 "Takipçi",
                                     () {
-                                        Get.to(()=>FollowersDetailScreen(dataS,"Takipçi"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                                        Get.to(()=>FollowersDetailScreen(dataS,"Takipçi"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                                       },
                               ),
                               FollowersModel(
                                 data.get('following').length.toString(),
                                 "Takip",
                                     () {
-                                  Get.to(()=>FollowersDetailScreen(data.get('following'),"Takip"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                                  Get.to(()=>FollowersDetailScreen(data.get('following'),"Takip"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                                     },
                               ),
                             ],
@@ -128,7 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               children: [
                                 ListTile(
                                   onTap: () {
-                                    Get.to(()=>const EditProfileScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                                    Get.to(()=>const EditProfileScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                                   },
                                   title: Text("Profili Düzenle",style: GoogleFonts.oswald(),),
                                   leading: const Icon(Icons.edit),
@@ -146,7 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       title: "Uyarı !",
                                       onConfirm: () async{
                                         final ids = AuthService().firebaseAuth.currentUser!.uid;
-                                        Get.to(()=>const LoginScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                                        Get.to(()=>const LoginScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                                         FirebaseAuth.instance.currentUser!.delete();
                                         QuerySnapshot snapuser = await FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: ids).get();
                                         QuerySnapshot snappost = await FirebaseFirestore.instance.collection('News').doc(ids).collection('Bookmark').get();
@@ -173,20 +173,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                                 ListTile(
                                   onTap: () {
-                                    Get.defaultDialog(
-                                      content: const Text("Çıkış yapmak istiyor musunuz ?"),
-                                      contentPadding: EdgeInsets.all(10),
-                                      buttonColor: Colors.red,
-                                      cancelTextColor: Colors.white,
-                                      confirmTextColor: Colors.white,
-                                      textCancel: "Hayır",
-                                      textConfirm: "Evet",
-                                      title: "Dikkat",
-                                      onConfirm: () {
-                                        AuthService().signOut();
-                                        Get.back();
-                                      },
-                                    );
+                                    AuthService().signOut();
                                   },
                                   title: Text("Çıkış Yap",style: GoogleFonts.oswald(color: Colors.red),),
                                   leading: const Icon(Icons.logout,color: Colors.red,),

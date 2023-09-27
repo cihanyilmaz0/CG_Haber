@@ -37,7 +37,7 @@ class SearchModel extends StatelessWidget {
               }
               return GestureDetector(
                 onTap: () {
-                  Get.to(()=>UserDetailScreen(snap[index].get('uid')),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                  Get.to(()=>UserDetailScreen(snap[index].get('uid')),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                 },
                 child: Container(
                   decoration: BoxDecoration(

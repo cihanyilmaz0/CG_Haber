@@ -66,7 +66,7 @@ class _HobiesScreenState extends State<HobiesScreen> {
                     if(mounted){
                       Get.snackbar("İlgi alanlarınız başarıyla kaydedildi.", "Anasayfaya yönlendiriliyorsunuz",snackPosition: SnackPosition.BOTTOM);
                     }
-                    Get.to(()=>const HomeScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                    Get.to(()=>const HomeScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                   } else {
                     print('User not found');
                   }
@@ -133,7 +133,7 @@ class _HobiesScreenState extends State<HobiesScreen> {
                       Get.snackbar("Uyarı !", "Lütfen seçim yapınız.",snackPosition: SnackPosition.BOTTOM);
                     }
                     runApp(const MyApp());
-                    Get.to(()=>const HomeScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                    Get.to(()=>const HomeScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                   } else {
                     print('User not found');
                   }

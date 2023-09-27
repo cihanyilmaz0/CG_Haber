@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:haber/compenents/my_button.dart';
 import 'package:haber/compenents/my_personaltextfield.dart';
 import 'package:haber/models/pick_image.dart';
+import 'package:haber/screens/profile_screen.dart';
 import 'package:haber/services/auth_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
@@ -20,8 +21,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     Uint8List? image;
-    void selectImage() async{
-      Uint8List img= await pickImage(ImageSource.gallery);
+    void selectImage(ImageSource source) async{
+      Uint8List img= await pickImage(source);
       setState(() {
         image=img;
       });
@@ -29,21 +30,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       AuthService().saveData(file: image!);
     }
     Future<void> editField(String field,String newValue) async{
-      if(newValue.trim().length>0){
+      if(newValue.isNotEmpty){
         var a = FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: AuthService().firebaseAuth.currentUser!.uid).get();
         a.then((value) => {value.docs.single.reference.update({field:newValue})});
-      }else{
-        if(field=="name"){
-          field="İsminiz";
-        }if(field=="username"){
-          field="Kullanıcı adınız";
-        }if(field=="bio"){
-          field="Biyografiniz";
-        }
-        Get.snackbar("Dikkat", "$field değiştirilmedi",snackPosition: SnackPosition.BOTTOM);
       }
     }
-
     TextEditingController nameController = TextEditingController();
     TextEditingController usernameController = TextEditingController();
     TextEditingController bioController = TextEditingController();
@@ -81,7 +72,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: IconButton(
                               icon: Icon(Icons.camera_alt),
                               onPressed: () {
-                                selectImage();
+                                Get.defaultDialog(
+                                  title: "",
+                                  content: Column(
+                                    children: [
+                                      MyTextButton(
+                                        text: "Kameradan Seç",
+                                        onTap: () {
+                                          selectImage(ImageSource.camera);
+                                          Get.back();
+                                        },
+                                      ),
+                                      MyTextButton(
+                                        text: "Galeriden Seç",
+                                        onTap: () {
+                                          selectImage(ImageSource.gallery);
+                                          Get.back();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
                               },
                             ),
                           ),
@@ -89,9 +100,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height/18,),
-                    MyProfileField(nameController, snapshot.data!.docs.first.get('name'),"Adınız Soyadınız"),
-                    MyProfileField(usernameController, snapshot.data!.docs.first.get('username'),"Kullanıcı Adınız"),
-                    MyProfileField(bioController, snapshot.data!.docs.first.get('bio'),"Hakkınızda"),
+                    MyProfileField(nameController,"Adınız Soyadınız", snapshot.data!.docs.first.get('name').length==0 ? "Adınız Soyadınız" : snapshot.data!.docs.first.get('name')),
+                    MyProfileField(usernameController,"Kullanıcı Adınız", snapshot.data!.docs.first.get('username')),
+                    MyProfileField(bioController,"Hakkınızda", snapshot.data!.docs.first.get('bio')),
                     MyButton(
                       text: "Kaydet",
                       onTap: () {

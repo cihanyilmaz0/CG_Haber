@@ -31,7 +31,7 @@ class SliderNews extends StatelessWidget {
           }
           return InkWell(
             onTap: () {
-              Get.to(()=>DetailScreen(controller.sliderHaberResult[index].url),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+              Get.to(()=>DetailScreen(controller.sliderHaberResult[index].url),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
             },
             child: Stack(
               children: [

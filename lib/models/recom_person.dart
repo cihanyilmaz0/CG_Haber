@@ -31,7 +31,7 @@ class RecomPerson extends StatelessWidget {
           return Container();
         }
         return SizedBox(
-          height: MediaQuery.of(context).size.height/3.5,
+          height: MediaQuery.of(context).size.height/5,
           child: ListView.builder(
             itemCount: notFollowing.length,
             scrollDirection: Axis.horizontal,
@@ -44,7 +44,6 @@ class RecomPerson extends StatelessWidget {
                 },
                 child: Container(
                   margin: const EdgeInsets.only(left: 15),
-                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                     color: Colors.grey.shade800
@@ -52,34 +51,28 @@ class RecomPerson extends StatelessWidget {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 6),
+                        padding: const EdgeInsets.only(top: 3,bottom: 4),
                         child: CircleAvatar(
-                          radius: 35,
+                          radius: 25,
                           backgroundImage: NetworkImage(userData['imageUrl']),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(7.0),
-                        child: Text(userData['username']),
-                      ),
-                      Text(userData['name'],style: GoogleFonts.oswald(fontSize: 12)),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: MyButton(
-                          padding: 0,
-                          width: 80,
-                          height: 30,
-                          color: Colors.blue,
-                          text: "Takip Et",
-                          fontsize: 12,
-                          onTap: () async{
-                            var degis =
-                                await FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: currentUserUid).get();
-                            degis.docs.first.reference.update({
-                              'following' : FieldValue.arrayUnion([userData['uid']])
-                            });
-                          },
-                        ),
+                      Expanded(child: Text(userData['username'])),
+                      Expanded(child: Text(userData['name'],style: GoogleFonts.oswald(fontSize: 12))),
+                      MyButton(
+                        padding: 0,
+                        width: 80,
+                        height: 30,
+                        color: Colors.blue,
+                        text: "Takip Et",
+                        fontsize: 12,
+                        onTap: () async{
+                          var degis =
+                              await FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: currentUserUid).get();
+                          degis.docs.first.reference.update({
+                            'following' : FieldValue.arrayUnion([userData['uid']])
+                          });
+                        },
                       ),
                     ],
                   ),

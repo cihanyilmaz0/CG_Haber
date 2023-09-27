@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 'name':'   ',
                                 'following':[]
                               });
-                          Get.to(()=>const HobiesScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                          Get.to(()=>const HobiesScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                         }else{
                           Get.back();
                         }
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       MyTextButton(
                         text: "Hemen üye ol",
                         onTap: () {
-                          Get.to(()=>const RegisterScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                          Get.to(()=>const RegisterScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                         },
                       ),
                     ],

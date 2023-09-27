@@ -36,7 +36,7 @@ class _NewsScreenState extends State<NewsScreen> {
             MyIconButton(
               icon: const Icon(Icons.search),
               onTap: () {
-                Get.to(()=>const SearchScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                Get.to(()=>const SearchScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
               },
             ),
           ],
@@ -78,7 +78,7 @@ class _NewsScreenState extends State<NewsScreen> {
                         onPressed: () {
                           final a = FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: AuthService().firebaseAuth.currentUser!.uid).snapshots();
                           a.forEach((element) {
-                            Get.to(()=>PersonalNewsScreen(element.docs.first.get('hobies').cast<String>()),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                            Get.to(()=>PersonalNewsScreen(element.docs.first.get('hobies').cast<String>()),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                           });
                         },
                       ),

@@ -82,8 +82,8 @@ class _MessageScreenState extends State<MessageScreen> {
               builder: (context, snapshot) {
                 if(!snapshot.hasData){
                   return SizedBox(
-                      height: MediaQuery.of(context).size.height/5,
-                      width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height/5,
+                    width: MediaQuery.of(context).size.width,
                     child: Center(
                       child: Text("Takip ettiğiniz kimse yok."),
                     ),
@@ -155,89 +155,91 @@ class _MessageScreenState extends State<MessageScreen> {
                   );
                 }
                 List<QueryDocumentSnapshot> data = snapshot.data!.docs;
-                return Container(
-                  height: MediaQuery.of(context).size.height/1.49,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
-                      color: Colors.black54
-                  ),
-                  child: ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(top: 16),
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final messageRef = data[index].reference.collection('message');
-                      return StreamBuilder(
-                        stream: messageRef.orderBy('time', descending: true).limit(1).snapshots(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.waiting) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                          if (snapshot.hasError) {
-                            return Center(
-                              child: Text('Veriler yüklenirken bir hata oluştu: ${snapshot.error.toString()}'),
-                            );
-                          }if (snapshot.data!.docs.isEmpty) {
-                            return const Center(
-                              child: Text('Hiç mesajınız yok.'),
-                            );
-                          }
-                          final messageData = snapshot.data!.docs.first.data();
-                          return FutureBuilder(
-                            future: data[index].id.split('-')[0] == AuthService().firebaseAuth.currentUser!.uid ?
-                            getUserDetail(data[index].id.split('-')[1]) :
-                            getUserDetail(data[index].id.split('-')[0]),
-                            builder: (context, snapshot) {
-                              var result = snapshot.data;
-                              if(snapshot.hasData){
-                                return ListTile(
-                                  title: Text(result['username']),
-                                  leading: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 30,
-                                    backgroundImage: NetworkImage(result['imageUrl']),
-                                  ),
-                                  subtitle: Text(messageData['message']),
-                                  trailing: Container(
-                                    width: MediaQuery.of(context).size.width/5,
-                                    child: Row(
-                                      children: [
-                                        Text(DateFormat('HH:mm').format(messageData['time'].toDate()).toString()),
-                                        const Spacer(),
-                                        messageData['isRead'] || messageData['sendBy']==AuthService().firebaseAuth.currentUser!.uid
-                                            ? Container() :
-                                        const CircleAvatar(
-                                          backgroundColor: Colors.blue,
-                                          radius: 10,
-                                        ),
-                                      ],
+                return Expanded(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
+                        color: Colors.black54
+                    ),
+                    child: ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.only(top: 16),
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final messageRef = data[index].reference.collection('message');
+                        return StreamBuilder(
+                          stream: messageRef.orderBy('time', descending: true).limit(1).snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            if (snapshot.hasError) {
+                              return Center(
+                                child: Text('Veriler yüklenirken bir hata oluştu: ${snapshot.error.toString()}'),
+                              );
+                            }if (snapshot.data!.docs.isEmpty) {
+                              return const Center(
+                                child: Text('Hiç mesajınız yok.'),
+                              );
+                            }
+                            final messageData = snapshot.data!.docs.first.data();
+                            return FutureBuilder(
+                              future: data[index].id.split('-')[0] == AuthService().firebaseAuth.currentUser!.uid ?
+                              getUserDetail(data[index].id.split('-')[1]) :
+                              getUserDetail(data[index].id.split('-')[0]),
+                              builder: (context, snapshot) {
+                                String message = messageData['message'].length>50 ? messageData['message'].substring(0,50) + "..." : messageData['message'];
+                                var result = snapshot.data;
+                                if(snapshot.hasData){
+                                  return ListTile(
+                                    title: Text(result['username']),
+                                    leading: CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      radius: 30,
+                                      backgroundImage: NetworkImage(result['imageUrl']),
                                     ),
-                                  ),
-                                  onTap: () async {
-                                    Get.to(()=>SendMessageScreen(
-                                      yollayan: AuthService().firebaseAuth.currentUser!.uid,
-                                      alan: data[index].id.split('-')[0] == AuthService().firebaseAuth.currentUser!.uid
-                                          ? data[index].id.split('-')[1]
-                                          : data[index].id.split('-')[0],
-                                      url: result['imageUrl'],
-                                      kadi: result['username'],
+                                    subtitle: Text(message),
+                                    trailing: SizedBox(
+                                      width: MediaQuery.of(context).size.width/5,
+                                      child: Row(
+                                        children: [
+                                          Text(DateFormat('HH:mm').format(messageData['time'].toDate()).toString()),
+                                          const Spacer(),
+                                          messageData['isRead'] || messageData['sendBy']==AuthService().firebaseAuth.currentUser!.uid
+                                              ? Container() :
+                                          const CircleAvatar(
+                                            backgroundColor: Colors.blue,
+                                            radius: 10,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                        transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000)
-                                    );
-                                  },
-                                );
-                              }else{
-                                return const Center(child: CircularProgressIndicator());
-                              }
-                            },
-                          );
-                        },
-                      );
-                    },
+                                    onTap: () async {
+                                      Get.to(()=>SendMessageScreen(
+                                        yollayan: AuthService().firebaseAuth.currentUser!.uid,
+                                        alan: data[index].id.split('-')[0] == AuthService().firebaseAuth.currentUser!.uid
+                                            ? data[index].id.split('-')[1]
+                                            : data[index].id.split('-')[0],
+                                        url: result['imageUrl'],
+                                        kadi: result['username'],
+                                      ),
+                                          transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000)
+                                      );
+                                    },
+                                  );
+                                }else{
+                                  return const Center(child: CircularProgressIndicator());
+                                }
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                 );
               },

@@ -125,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           sifreController.text = "";
                           sifreonayController.text = "";
                         }
-                        Get.to(()=>const HobiesScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                        Get.to(()=>const HobiesScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                       }
                     };
                   },

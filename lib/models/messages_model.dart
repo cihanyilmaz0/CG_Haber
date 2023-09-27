@@ -51,7 +51,7 @@ class _MessagesModelState extends State<MessagesModel> {
                           ? AnyLinkPreview(
                         link: widget.snapshot.data!.docs[index]['message'],
                         onTap: () {
-                          Get.to(()=>DetailScreen(widget.snapshot.data!.docs[index]['message']),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                          Get.to(()=>DetailScreen(widget.snapshot.data!.docs[index]['message']),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                         },
                       )
                           : Text(widget.snapshot.data!.docs[index]['message'],style: TextStyle(color: Colors.black),),

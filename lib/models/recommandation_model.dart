@@ -24,6 +24,7 @@ class Recommandation extends StatefulWidget {
 class _RecommandationState extends State<Recommandation> {
   List<bool> isBookmarkList = [];
   TextEditingController _controller = TextEditingController();
+
   @override
   void initState() {
     isBookmarkList = List.generate(widget.count, (index) => false);
@@ -102,7 +103,7 @@ class _RecommandationState extends State<Recommandation> {
             isSaved(index);
             return InkWell(
               onTap: () {
-                Get.to(()=>DetailScreen(widget.list[index].url),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                Get.to(()=>DetailScreen(widget.list[index].url),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
               },
               child: Card(
                 color: Colors.white10,

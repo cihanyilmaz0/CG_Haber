@@ -107,6 +107,12 @@ class _SavedScreenState extends State<SavedScreen> {
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(child: Text('Hata: ${snapshot.error}'));
+            }if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            final snap = snapshot.data!.docs;
+            if (snap.isEmpty) {
+              return const Center(child: Text("Kaydedilmiş haberiniz yok."),);
             }else{
               return ListView.builder(
                 shrinkWrap: true,
@@ -116,7 +122,7 @@ class _SavedScreenState extends State<SavedScreen> {
                   isSaved(index, snapshot.data!.docs[index].get('name'));
                   return InkWell(
                     onTap: () {
-                      Get.to(()=>DetailScreen(snapshot.data!.docs[index].get('url')),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                      Get.to(()=>DetailScreen(snapshot.data!.docs[index].get('url')),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                     },
                     child: Card(
                       color: Colors.white10,

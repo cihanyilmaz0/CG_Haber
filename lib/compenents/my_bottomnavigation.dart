@@ -12,7 +12,7 @@ class MyNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedNotchBottomBar(
       notchBottomBarController: controller,
-      durationInMilliSeconds: 600,
+      durationInMilliSeconds: 300,
       onTap: onTap,
       color: Colors.black87,
       notchColor: Colors.black,

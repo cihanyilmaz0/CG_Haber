@@ -119,14 +119,14 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               dataS.length.toString(),
                               "Takipçi",
                                   () {
-                                Get.to(()=>FollowersDetailScreen(dataS,"Takipçi"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                                Get.to(()=>FollowersDetailScreen(dataS,"Takipçi"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                               },
                             ),
                             FollowersModel(
                               data.get('following').length.toString(),
                               "Takip",
                                   () {
-                                Get.to(()=>FollowersDetailScreen(data.get('following'),"Takip"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                                Get.to(()=>FollowersDetailScreen(data.get('following'),"Takip"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                               },
                             ),
                           ],
@@ -142,7 +142,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                             children: [
                               ListTile(
                                 onTap: () {
-                                  Get.to(()=>SavedScreen(data.get('uid'),true),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000));
+                                  Get.to(()=>SavedScreen(data.get('uid'),true),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                                 },
                                 title: Text("Kaydedilen Haberler",style: GoogleFonts.oswald(),),
                                 leading: const Icon(Icons.bookmark),
