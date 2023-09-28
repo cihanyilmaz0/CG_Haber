@@ -110,7 +110,7 @@ class _MessageScreenState extends State<MessageScreen> {
                                     yollayan: AuthService().firebaseAuth.currentUser!.uid,
                                     url: snap[index].get('imageUrl'),
                                     kadi: snap[index].get('username')
-                                ),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000)
+                                ),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600)
                             );
                           },
                           child: Column(
@@ -227,7 +227,7 @@ class _MessageScreenState extends State<MessageScreen> {
                                         url: result['imageUrl'],
                                         kadi: result['username'],
                                       ),
-                                          transition: Transition.rightToLeft,duration: const Duration(milliseconds: 1000)
+                                          transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600)
                                       );
                                     },
                                   );

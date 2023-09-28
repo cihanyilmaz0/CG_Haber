@@ -1,26 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:haber/models/haber_model.dart';
+import 'package:haber/services/auth_service.dart';
 import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
   var sliderHaberResult = [].obs;
+  var listHaberResult = [].obs;
   var magazineHaberResult = [].obs;
   var technologyHaberResult = [].obs;
   var economyHaberResult = [].obs;
   var sportHaberResult = [].obs;
 
+  List<String> hobiesList=[];
+  String hobiesString="";
   var isDataLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     loadData("general", sliderHaberResult);
-    loadPersonalNews();
   }
 
   loadData(String tag, List targetList) async {
     final headers = {
-      'authorization': 'apikey 0we2fMY2adLunH7fVrLrvS:07MRcvVraw7KL4WAKIarRt',
+      'authorization': 'apikey 0B5OfBwZGZjAL76DOV67GZ:6vk15WsQRwNcW12sdsJxLA',
       'content-type': 'application/json',
     };
     final params = {
@@ -45,11 +49,52 @@ class HomeController extends GetxController {
       print(e.toString());
     }
   }
+  loadHobies() async {
+    QuerySnapshot snap = await FirebaseFirestore.instance
+        .collection('Users')
+        .where('uid', isEqualTo: AuthService().firebaseAuth.currentUser!.uid)
+        .get();
+
+    hobiesList = snap.docs.first.get('hobies').cast<String>();
+    if (hobiesList.isEmpty) {
+      hobiesString = "";
+    } else {
+      hobiesString = hobiesList.last;
+    }
+    if (hobiesString == "Magazin") {
+      loadData("magazine", listHaberResult);
+    }
+    if (hobiesString == "Ekonomi") {
+      loadData("economy", listHaberResult);
+    }
+    if (hobiesString == "Teknoloji") {
+      loadData("technology", listHaberResult);
+    }
+    if (hobiesString == "Spor") {
+      loadData("Sport", listHaberResult);
+    }
+    if (hobiesString == "") {
+      loadData("general", listHaberResult);
+    }
+  }
 
   loadPersonalNews() async {
-    loadData("magazine", magazineHaberResult);
-    loadData("technology", technologyHaberResult);
-    loadData("economy", economyHaberResult);
-    loadData("sport", sportHaberResult);
+    QuerySnapshot snap = await FirebaseFirestore.instance
+        .collection('Users')
+        .where('uid', isEqualTo: AuthService().firebaseAuth.currentUser!.uid)
+        .get();
+
+    hobiesList = snap.docs.first.get('hobies').cast<String>();
+    for (int i = 0; i < hobiesList.length; i++) {
+      if(hobiesList[i] == "Magazin"){
+        loadData("magazine", magazineHaberResult);
+      }if(hobiesList[i]=="Teknoloji"){
+        loadData("technology", technologyHaberResult);
+      }if(hobiesList[i]=="Ekonomi"){
+        loadData("economy", economyHaberResult);
+      }if(hobiesList[i]=="Spor"){
+        loadData("sport", sportHaberResult);
+      }
+    }
   }
 }

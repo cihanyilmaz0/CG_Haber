@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:haber/compenents/my_button.dart';
 import 'package:haber/models/recommandation_model.dart';
 import 'package:get/get.dart';
 import 'package:haber/services/home_controller.dart';
@@ -30,7 +31,12 @@ class _PersonalNewsScreenState extends State<PersonalNewsScreen> {
         centerTitle: true,
         toolbarHeight: 65,
         elevation: 0,
-        leading: null,
+        leading: MyIconButton(
+          icon: const Icon(Icons.arrow_back_ios_sharp),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: () async{

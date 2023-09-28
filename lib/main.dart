@@ -12,7 +12,7 @@ import 'package:haber/services/home_controller.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -31,6 +31,12 @@ class MyApp extends StatelessWidget {
             final user = snapshot.data;
             if (user == null) {
               controller.sliderHaberResult.clear();
+              controller.listHaberResult.clear();
+              controller.hobiesList.clear();
+              controller.economyHaberResult.clear();
+              controller.technologyHaberResult.clear();
+              controller.magazineHaberResult.clear();
+              controller.sportHaberResult.clear();
               return const LoginScreen();
             } else {
               FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: AuthService().firebaseAuth.currentUser!.uid).snapshots()
@@ -41,10 +47,12 @@ class MyApp extends StatelessWidget {
                   }
                 );
               });
-              return HomeScreen();
+              controller.loadPersonalNews();
+              controller.loadHobies();
+              return const HomeScreen();
             }
           }
-          return LoadingScreen();
+          return const LoadingScreen();
         },
       ),
     );

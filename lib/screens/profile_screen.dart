@@ -7,7 +7,6 @@ import 'package:haber/compenents/my_info.dart';
 import 'package:haber/models/followers_following_model.dart';
 import 'package:haber/screens/editprofile_screen.dart';
 import 'package:haber/screens/followersdetail_screen.dart';
-import 'package:haber/screens/login_screen.dart';
 import 'package:haber/services/auth_service.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -152,7 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   onTap: () {
                                     Get.defaultDialog(
                                       content: const Text("Hesabınıza ait tüm içerikler kalıcı olarak silinecek onaylıyor musunuz ?"),
-                                      contentPadding: EdgeInsets.all(10),
+                                      contentPadding: const EdgeInsets.all(10),
                                       buttonColor: Colors.red,
                                       cancelTextColor: Colors.white,
                                       confirmTextColor: Colors.white,
@@ -161,7 +160,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       title: "Uyarı !",
                                       onConfirm: () async{
                                         final ids = AuthService().firebaseAuth.currentUser!.uid;
-                                        Get.to(()=>const LoginScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                                         FirebaseAuth.instance.currentUser!.delete();
                                         QuerySnapshot snapuser = await FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: ids).get();
                                         QuerySnapshot snappost = await FirebaseFirestore.instance.collection('News').doc(ids).collection('Bookmark').get();
