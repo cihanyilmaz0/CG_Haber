@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "AppIcon@2x~ipad.png",
+      "filename" : "AppIcon-20~ipad.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "AppIcon@3x.png",
+      "filename" : "AppIcon-20@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "AppIcon~ios-marketing.png",
+      "filename" : "AppIcon-20@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
