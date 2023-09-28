@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:haber/compenents/my_button.dart';
 import 'package:haber/compenents/my_textfield.dart';
+import 'package:haber/screens/detail_screen.dart';
 import 'package:haber/screens/hobies_screen.dart';
 import 'package:get/get.dart';
 import 'package:haber/services/auth_service.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -69,26 +71,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     )
                 ),
-                RichText(
-                  text: const TextSpan(
-                    text: '',
-                    children: <TextSpan>[
-                      TextSpan(
-                        text:
-                        'Kayıt olarak şu şartlarımızı kabul etmiş olursunuz, ',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16),
-                      ),
-                      TextSpan(
+                GestureDetector(
+                  onTap: () {
+                    Get.to(()=>DetailScreen("https://cg-news.vercel.app/"));
+                  },
+                  child: RichText(
+                    text: const TextSpan(
+                      text: '',
+                      children: <TextSpan>[
+                        TextSpan(
                           text:
-                          'Hizmet şartları ve gizlilik politikası',
+                          'Kayıt olarak şu şartlarımızı kabul etmiş olursunuz, ',
                           style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16)
-                      ),
-                    ],
+                              color: Colors.white,
+                              fontSize: 16),
+                        ),
+                        TextSpan(
+                            text:
+                            'Hizmet şartları ve gizlilik politikası',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16)
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 MyButton(
