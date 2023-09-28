@@ -10,6 +10,7 @@ import 'package:haber/screens/followersdetail_screen.dart';
 import 'package:haber/screens/login_screen.dart';
 import 'package:haber/services/auth_service.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -132,6 +133,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   },
                                   title: Text("Profili Düzenle",style: GoogleFonts.oswald(),),
                                   leading: const Icon(Icons.edit),
+                                ),
+                                ListTile(
+                                  title: const Text("Kullanıcı Hizmet Şartları"),
+                                  leading: const Icon(Icons.newspaper_outlined),
+                                  onTap: () {
+                                    launchUrl(Uri.parse("https://cgnewsapp.vercel.app"));
+                                  },
+                                ),
+                                ListTile(
+                                  title: const Text("Gizlilik Sözleşmesi"),
+                                  leading: const Icon(Icons.lock_clock_outlined),
+                                  onTap: () {
+                                    launchUrl(Uri.parse("https://cgnewsapp.vercel.app/privacy.html"));
+                                  },
                                 ),
                                 ListTile(
                                   onTap: () {

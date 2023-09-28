@@ -72,32 +72,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     )
                 ),
-                GestureDetector(
-                  onTap: () {
-                    launchUrl(Uri.parse("https://cgnewsapp.vercel.app"));
-                  },
-                  child: RichText(
-                    text: const TextSpan(
-                      text: '',
-                      children: <TextSpan>[
-                        TextSpan(
-                          text:
-                          'Kayıt olarak şu şartlarımızı kabul etmiş olursunuz, ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16),
-                        ),
-                        TextSpan(
-                            text:
-                            'Hizmet şartları ve gizlilik politikası',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)
-                        ),
-                      ],
+                Text("Kayıt olarak şu şartlarımızı kabul etmiş olursunuz ;"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                         launchUrl(Uri.parse("https://cgnewsapp.vercel.app"));
+                        },
+                        child: const Text("Hizmet Şartları",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),)),
+                    const Text(" ve "),
+                    GestureDetector(
+                        onTap: () {
+                          launchUrl(Uri.parse("https://cgnewsapp.vercel.app/privacy.html"));
+                        },
+                        child: const Text("Gizlilik Politikası",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),)
                     ),
-                  ),
+                  ],
                 ),
                 MyButton(
                   onTap: () async {
