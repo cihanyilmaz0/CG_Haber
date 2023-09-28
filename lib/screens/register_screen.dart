@@ -8,6 +8,7 @@ import 'package:haber/screens/detail_screen.dart';
 import 'package:haber/screens/hobies_screen.dart';
 import 'package:get/get.dart';
 import 'package:haber/services/auth_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -73,7 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(()=>DetailScreen("https://cg-news.vercel.app/"));
+                    launchUrl(Uri.parse("https://cgnewsapp.vercel.app"));
                   },
                   child: RichText(
                     text: const TextSpan(

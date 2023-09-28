@@ -54,6 +54,7 @@ dependencies:
   modal_bottom_sheet: ^2.1.2
   webview_flutter: ^4.2.4
   firebase_messaging: ^14.6.8
+  url_launcher: ^6.1.11
 
 
 dev_dependencies:
