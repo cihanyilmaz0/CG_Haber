@@ -105,15 +105,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 dataS.length.toString(),
                                 "Takipçi",
                                     () {
-                                        Get.to(()=>FollowersDetailScreen(dataS,"Takipçi"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
-                                      },
+                                  Get.to(()=>FollowersDetailScreen(dataS,"Takipçi"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
+                                },
                               ),
                               FollowersModel(
                                 data.get('following').length.toString(),
                                 "Takip",
                                     () {
                                   Get.to(()=>FollowersDetailScreen(data.get('following'),"Takip"),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
-                                    },
+                                },
                               ),
                             ],
                           ),
@@ -160,24 +160,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       title: "Uyarı !",
                                       onConfirm: () async{
                                         final ids = AuthService().firebaseAuth.currentUser!.uid;
-                                        FirebaseAuth.instance.currentUser!.delete();
                                         QuerySnapshot snapuser = await FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: ids).get();
                                         QuerySnapshot snappost = await FirebaseFirestore.instance.collection('News').doc(ids).collection('Bookmark').get();
                                         QuerySnapshot snapmessage = await FirebaseFirestore.instance.collection('Messages').where('users',arrayContains: ids).get();
-                                        snapmessage.docs.forEach((element) async{
-                                          String id = element.get('docID');
-                                          final a = await FirebaseFirestore.instance.collection('Messages').doc(id).collection('message').get();
-                                          for (DocumentSnapshot document in a.docs) {
-                                            await document.reference.delete();
-                                          }
-                                        });
-                                        for (DocumentSnapshot document in snappost.docs) {
+                                        final follow = await FirebaseFirestore.instance.collection('Users').where('following',arrayContains: ids).get();
+                                        for(int i = 0; i<follow.docs.length;i++){
+                                          follow.docs[i].reference.update(
+                                              {
+                                                'following' : FieldValue.arrayRemove([ids])
+                                              });
+                                        }for (DocumentSnapshot document in snappost.docs) {
                                           await document.reference.delete();
                                         }for (DocumentSnapshot document in snapmessage.docs) {
                                           await document.reference.delete();
                                         }for (DocumentSnapshot document in snapuser.docs) {
                                           await document.reference.delete();
                                         }
+                                        FirebaseAuth.instance.currentUser!.delete();
+                                        AuthService().signOut();
+                                        Get.back();
                                       },
                                     );
                                   },
@@ -186,7 +187,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                                 ListTile(
                                   onTap: () {
-                                    AuthService().signOut();
+                                    Get.defaultDialog(
+                                        content: const Text("Çıkış yapmak istediğinize emin misiniz ?"),
+                                        contentPadding: const EdgeInsets.all(10),
+                                        buttonColor: Colors.red,
+                                        cancelTextColor: Colors.white,
+                                        confirmTextColor: Colors.white,
+                                        textCancel: "Hayır",
+                                        textConfirm: "Evet",
+                                        title: "Dikkat !",
+                                        onConfirm: ()async{
+                                          await AuthService().signOut();
+                                          Get.back();
+                                        }
+                                    );
                                   },
                                   title: Text("Çıkış Yap",style: GoogleFonts.oswald(color: Colors.red),),
                                   leading: const Icon(Icons.logout,color: Colors.red,),

@@ -31,7 +31,7 @@ class RecomPerson extends StatelessWidget {
           return Container();
         }
         return SizedBox(
-          height: MediaQuery.of(context).size.height/5,
+          height: 136,
           child: ListView.builder(
             itemCount: notFollowing.length,
             scrollDirection: Axis.horizontal,
@@ -58,7 +58,7 @@ class RecomPerson extends StatelessWidget {
                         ),
                       ),
                       Expanded(child: Text(userData['username'])),
-                      Expanded(child: Text(userData['name'],style: GoogleFonts.oswald(fontSize: 12))),
+                      userData['name'] !="" ? Expanded(child: Text(userData['name'],style: GoogleFonts.oswald(fontSize: 12))) : Container(),
                       MyButton(
                         padding: 0,
                         width: 80,
