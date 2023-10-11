@@ -24,7 +24,7 @@ class HomeController extends GetxController {
 
   loadData(String tag, List targetList) async {
     final headers = {
-      'authorization': 'apikey 0B5OfBwZGZjAL76DOV67GZ:6vk15WsQRwNcW12sdsJxLA',
+      'authorization': 'apikey 4dXRW9rjmMnIwh4l3jEGsZ:2kHwvI9yMsveUWWv3dq39S',
       'content-type': 'application/json',
     };
     final params = {

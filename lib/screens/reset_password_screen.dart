@@ -17,36 +17,43 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-         child: Center(
-           child: Column(
-             mainAxisAlignment: MainAxisAlignment.center,
-             children: [
-               Text("Şifreni mi unuttun ?",style: GoogleFonts.akayaKanadaka(fontSize: MediaQuery.of(context).size.width/12)),
-               SizedBox(height: 20,),
-               Text("Mail adresini gir sana bir doğrulama kodu gönderelim."),
-               Padding(
-                 padding: EdgeInsets.all(12),
-                   child: MyTextField(controller, "Mail Adresin", false, TextInputType.emailAddress, Icon(Icons.mail,color: Colors.black,))),
-               MyButton(
-                 text: "Onayla",
-                 onTap: () async{
-                   try {
-                     await FirebaseAuth.instance.sendPasswordResetEmail(email: controller.text);
-                     Get.snackbar("Şifreni değiştirmek için sana bir link yolladık.", "Gereksiz postaları kontrol etmeyi unutma.",snackPosition: SnackPosition.BOTTOM);
-                   } on FirebaseAuthException catch (e) {
-                     Get.snackbar(e.message.toString(),"",snackPosition: SnackPosition.BOTTOM);
-                   }
-                 },
-                 color: Color.fromARGB(100, 100, 100, 100),
-                 height: 80,
-                 fontsize: 25,
-                 padding: 25,
-                 width: MediaQuery.of(context).size.width,
-               ),
-             ],
-           ),
-         ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: MyIconButton(
+          icon: const Icon(Icons.arrow_back_ios_sharp),
+          onTap: () {
+            Get.back();
+          },
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Şifreni mi unuttun ?",style: GoogleFonts.akayaKanadaka(fontSize: MediaQuery.of(context).size.width/12)),
+            const SizedBox(height: 20,),
+            const Text("Mail adresini gir sana bir doğrulama kodu gönderelim."),
+            Padding(
+              padding: const EdgeInsets.all(12),
+                child: MyTextField(controller, "Mail Adresin", false, TextInputType.emailAddress, const Icon(Icons.mail,color: Colors.black,))),
+            MyButton(
+              text: "Onayla",
+              onTap: () async{
+                try {
+                  await FirebaseAuth.instance.sendPasswordResetEmail(email: controller.text);
+                  Get.snackbar("Şifreni değiştirmek için sana bir link yolladık.", "Gereksiz postaları kontrol etmeyi unutma.",snackPosition: SnackPosition.BOTTOM);
+                } on FirebaseAuthException catch (e) {
+                  Get.snackbar(e.message.toString(),"",snackPosition: SnackPosition.BOTTOM);
+                }
+              },
+              color: const Color.fromARGB(100, 100, 100, 100),
+              height: 80,
+              fontsize: 25,
+              padding: 25,
+              width: MediaQuery.of(context).size.width,
+            ),
+          ],
+        ),
       ),
     );
   }

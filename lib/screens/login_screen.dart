@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   MyTextButton(
                     text: "Şifreni mi unuttun ?",
                     onTap: () {
-                      Get.to(()=>ResetPasswordScreen(),transition: Transition.zoom);
+                      Get.to(()=>ResetPasswordScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
                     },
                   ),
                 ],
