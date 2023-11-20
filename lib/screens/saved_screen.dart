@@ -5,6 +5,7 @@ import 'package:haber/compenents/my_button.dart';
 import 'package:haber/screens/detail_screen.dart';
 import 'package:haber/services/auth_service.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SavedScreen extends StatefulWidget {
   final String uid;
@@ -122,7 +123,8 @@ class _SavedScreenState extends State<SavedScreen> {
                   isSaved(index, snapshot.data!.docs[index].get('name'));
                   return InkWell(
                     onTap: () {
-                      Get.to(()=>DetailScreen(snapshot.data!.docs[index].get('url')),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
+                      //Get.to(()=>DetailScreen(snapshot.data!.docs[index].get('url')),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
+                      launchUrl(Uri.parse(snapshot.data!.docs[index].get('url')));
                     },
                     child: Card(
                       color: Colors.white10,

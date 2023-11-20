@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haber/screens/detail_screen.dart';
 import 'package:haber/services/home_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SliderNews extends StatelessWidget {
   const SliderNews({super.key});
@@ -31,7 +32,8 @@ class SliderNews extends StatelessWidget {
           }
           return InkWell(
             onTap: () {
-              Get.to(()=>DetailScreen(controller.sliderHaberResult[index].url),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
+              //Get.to(()=>DetailScreen(controller.sliderHaberResult[index].url),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
+              launchUrl(Uri.parse(controller.sliderHaberResult[index].url));
             },
             child: Stack(
               children: [

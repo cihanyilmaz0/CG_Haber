@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:haber/screens/detail_screen.dart';
 import 'package:haber/services/auth_service.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MessagesModel extends StatefulWidget {
   final AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot;
@@ -51,7 +52,8 @@ class _MessagesModelState extends State<MessagesModel> {
                           ? AnyLinkPreview(
                         link: widget.snapshot.data!.docs[index]['message'],
                         onTap: () {
-                          Get.to(()=>DetailScreen(widget.snapshot.data!.docs[index]['message']),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
+                          //Get.to(()=>DetailScreen(widget.snapshot.data!.docs[index]['message']),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
+                          launchUrl(Uri.parse(widget.snapshot.data!.docs[index]['message']));
                         },
                       )
                           : Text(widget.snapshot.data!.docs[index]['message'],style: TextStyle(color: Colors.black),),

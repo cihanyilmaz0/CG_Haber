@@ -5,6 +5,7 @@ import 'package:haber/compenents/my_button.dart';
 import 'package:haber/compenents/my_showjustbottombar.dart';
 import 'package:haber/screens/detail_screen.dart';
 import 'package:haber/services/auth_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Recommandation extends StatefulWidget {
   final RxList<dynamic> list;
@@ -103,7 +104,8 @@ class _RecommandationState extends State<Recommandation> {
             isSaved(index);
             return InkWell(
               onTap: () {
-                Get.to(()=>DetailScreen(widget.list[index].url),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
+                //Get.to(()=>DetailScreen(widget.list[index].url),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 600));
+                launchUrl(Uri.parse(widget.list[index].url));
               },
               child: Card(
                 color: Colors.white10,
